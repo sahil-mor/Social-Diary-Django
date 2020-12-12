@@ -128,16 +128,14 @@ Pipenv <br />
 PgAdmin <br />
 
 
-<!-- # TechStack -->
-<!-- <table>
-  <tr>
-    <td><img src="https://github.com/sahil-mor/RyZit/blob/master/public/assets/img/theme/node.jpg" width="150px" height="150px" /></td>
-    <td><img src="https://github.com/sahil-mor/RyZit/blob/master/public/assets/img/theme/mongoose.png" width="150px" height="150px" /></td>
-    <td><img src="https://github.com/sahil-mor/RyZit/blob/master/public/assets/img/theme/bootstrap.jpg"  width="150px" height="150px"></td>
-    <td><img src="https://github.com/sahil-mor/RyZit/blob/master/public/assets/img/theme/pwa.PNG"  width="150px" height="150px" />
-    <br />  </td>
-  </tr>
-  </table> -->
+# TechStack 
+  <table>
+    <tr>
+      <td><img src="https://github.com/sahil-mor/Social-Diary-Django/blob/master/mysite/static/images/django.png" width="150px" height="150px" /></td>
+      <td><img src="https://github.com/sahil-mor/Social-Diary-Django/blob/master/mysite/static/images/postgresql.png" width="150px" height="150px" /></td>
+      <br />  </td>
+    </tr>
+  </table>
 
 <br />
 
