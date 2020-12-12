@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="fullpage" class="fullpage-default">
+    <div class="section animated-row" data-section="slide01">
+        <div class="section-inner">
+            <div class="row justify-content-center">
+                <div class="col-md-8 wide-col-laptop">
+                    <div class="title-block animate" data-animate="fadeInUp">
+                        <span> </span>
+                        <h2>All Blogs</h2>
+                    </div>
+                    <div class="gallery-section">
+                        <div class="gallery-list owl-carousel">
+                            {% for each_blog in blogsData %}
+                            <a href="{% url 'blog' each_blog.id %}">
+                            <div class="item animate" data-animate="fadeInUp">
+                                <div class="portfolio-item">
+                                    <div class="thumb">
+                                        <img src="{{ each_blog.photo.url }}" alt="">
+                                    </div>
+                                    <div class="thumb-inner animate" data-animate="fadeInUp">
+                                        <h4> {{ each_blog.headline }} </h4>
+                                        <p> {{ each_blog.decription }} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

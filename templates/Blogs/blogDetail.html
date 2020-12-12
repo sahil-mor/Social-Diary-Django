@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    a :hover{
+        color: black;
+    }
+</style>
+<div id="fullpage" class="fullpage-default">
+    <div class="section animated-row" data-section="slide02">
+        <div class="section-inner">
+            <div class="about-section">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 wide-col-laptop">
+                        <div id="form-messages" class="mt-3">
+                            {% include 'messages.html' %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="about-contentbox">
+                                    <div class="animate" data-animate="fadeInUp">
+                                        <span> {{ blogData.owner_user.username }} </span>
+                                        <h2> {{ blogData.headline }} </h2>
+                                        <p> {{ blogData.decription }} </p>
+                                    </div>
+                                    <div class="facts-list owl-carousel">
+                                        
+                                        <div class="item animate" data-animate="fadeInUp">
+                                            <a href="{% url 'saveBlog' blogData.id %}"  class="counter-box">
+                                                <div>
+                                                    {% if whatToWrite == 'Saved' %}
+                                                    <i class="fa fa-bookmark counter-icon" aria-hidden="true"></i>
+                                                    {% else %}
+                                                    <i class="fa fa-bookmark-o counter-icon" aria-hidden="true"></i>
+                                                    {% endif %}
+                                                    <span class="count-number"> {{ blogData.num_of_saves }} </span> {{ whatToWrite }}
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="item animate" data-animate="fadeInUp">
+                                            <div class="counter-box">
+                                                <i class="fa fa-calendar counter-icon" aria-hidden="true"></i><span class="count-number"> {{ blogData.createAtDate|date:"M" }} </span>
+                                            </div>
+                                        </div>
+                                        <div class="item animate" data-animate="fadeInUp">
+                                            <div class="counter-box">
+                                                <i class="fa fa-calendar counter-icon" aria-hidden="true"></i><span class="count-number"> {{ blogData.createAtDate|date:"d" }} </span>
+                                            </div>
+                                        </div>
+                                        <div class="item animate" data-animate="fadeInUp">
+                                            <div class="counter-box">
+                                                <i class="fa fa-calendar counter-icon" aria-hidden="true"></i><span class="count-number"> {{ blogData.createAtDate|date:"Y" }} </span>
+                                            </div>
+                                        </div>
+                                        {% if blogData.owner_user_id == user.id %}
+                                        <div class="item animate" data-animate="fadeInUp">
+                                            <a href="{% url 'deleteBlog' blogData.id %}"  class="counter-box">
+                                                <div>
+                                                    <i class="fa fa-trash counter-icon" aria-hidden="true"></i><span class="count-number"> </span> Delete
+                                                </div>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <figure class="about-img animate" data-animate="fadeInUp"><img src="{{ blogData.photo.url }}" height="550px" class="rounded" alt=""></figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if comments %}
+    <div class="section animated-row" data-section="slide01">
+        <div class="section-inner">
+            <div class="row justify-content-center">
+                <div class="col-md-8 wide-col-laptop">
+                    <div class="title-block animate" data-animate="fadeInUp">
+                        <span>Comments</span>
+                        <h2>what users SAY?</h2>
+                    </div>
+                    <div class="col-md-8 offset-md-2">
+                        <div class="testimonials-section">
+                            <div class="testimonials-slider owl-carousel">
+                                {% for each_comment in comments %}
+                                <div class="item animate col-lg-12" data-animate="fadeInUp">
+                                    <div class="testimonial-item">
+                                        <div class="client-row">
+                                            <img src="{{ blogData.photo.url }}" class="rounded-circle" alt="profile 1">
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <h4> {{ each_comment.user.username }} </h4>
+                                            <p>" {{ each_comment.comment }} "</p>
+                                            <span> {{ each_comment.created_date }} </span>
+                                            {% if each_comment.user.id == user.id or blogData.owner_user_id == user.id  %}
+                                            <span style="position: absolute;right : 70px;bottom : 40px;width: 80px;height: 20px;">
+                                                <a href="{% url 'delete_comment' blogData.id each_comment.id %}" class="btn align-middle mx-auto" style="color: #fff;
+                                                background-color: #dc3545;
+                                                border-color: #dc3545;">
+                                                    Delete
+                                                </a>
+                                            </span>
+                                            {% endif %}
+                                        </div>                                           
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <div class="section animated-row" data-section="slide07">
+        <div class="section-inner">
+            <div class="row justify-content-center">
+                <div class="col-md-7 wide-col-laptop">
+                    <div class="title-block animate" data-animate="fadeInUp">
+                        <span></span>
+                        <h2>Wanna say something !!!</h2>
+                    </div>
+                    <div class="contact-section">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8 animate" data-animate="fadeInUp">
+                                <form  method="POST" action="{% url 'create_comment' blogData.id %}">
+                                    {% csrf_token %}
+                                    <div class="input-field">
+                                        <input type="text" class="form-control" name="comment" id="comment" required placeholder="Wanna say something">
+                                    </div>
+                                    <button class="btn" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+<!-- for loading static files -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include 'includes/header.html' %}
+        
+    <body>  
+            
+        <div id="video">
+            <div class="preloader">
+                <div class="preloader-bounce">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <header id="header">
+                <div class="container-fluid">
+                    <div class="navbar">
+                        <a href="#" id="logo" title="Elegance">
+                            {{ brandIntro.brandName }}
+                        </a>
+                        <div class="navigation-row">
+                            {% include 'includes/nav.html' %}
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <video autoplay muted loop id="myVideo">
+                <source src="{{ brandIntro.backgroundVideo.url }}" type="video/mp4">
+              </video>
+
+            {% block content%}
+
+            {% endblock %}
+
+              <div id="social-icons">
+            <div class="text-right">
+                <ul class="social-icons">
+                    <li><a href="{{ contactInfo.insta_link }}" target="_blank" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="{{ contactInfo.github_link }}" target="_blank" title="Linkedin"><i class="fa fa-github"></i></a></li>
+                    <li><a href="{{ contactInfo.linkedin_link }}" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="{{ contactInfo.website_link }}" target="_blank" title="Website"><i class="fa fa-globe"></i></a></li>
+                </ul>
+            </div>
+        </div>
+          
+        </div>
+            {% include 'includes/footer.html' %}
+
+    </body>
+</html>

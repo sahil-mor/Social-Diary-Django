@@ -1,0 +1,48 @@
+<nav id="navigation">
+    <button type="button" class="navbar-toggle"> <i class="fa fa-bars"></i> </button>
+    <div class="nav-box navbar-collapse">
+        <ul class="navigation-menu nav navbar-nav navbars" id="nav">
+            <li 
+                {% if request.path  == '/' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %} 
+            ><a href="{% url 'home' %}"> Home  </a></li>
+            {% if user.is_authenticated %} 
+            <li 
+                {% if request.get_full_path == '/accounts/dashboard' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %}   
+            ><a href="{% url 'dashboard' %}">Dashboard </a></li>
+            {% endif %}
+            <li 
+                {% if request.get_full_path == '/blogs/' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %}   
+            ><a href="{% url 'blogs' %}">Blogs</a></li>
+            <li 
+                {% if request.get_full_path == '/aboutme/' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %}   
+            ><a href="{% url 'aboutme' %}">About Me</a></li>
+            <li 
+                {% if request.get_full_path == '/contactus' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %}   
+            ><a href="{% url 'contactus' %}">Contact Us</a></li>
+            {% if user.is_authenticated %} 
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li 
+                {% if request.get_full_path == '/accounts/signin' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %}   
+            ><a href="{% url 'signin' %}">Sign In </a></li>
+            <li 
+                {% if request.get_full_path == '/accounts/signup' %}
+                data-menuanchor="slide01" class="active"
+                {% endif %}   
+            ><a href="{% url 'signup' %}">Sign Up </a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
